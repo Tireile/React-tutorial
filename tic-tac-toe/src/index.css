@@ -32,10 +32,18 @@ body {
     width: 34px;
   }
   
+  .red {
+    color: red;
+  }
+
   .square:focus {
     outline: none;
   }
   
+  .highlight-square {
+    background: lightblue;
+  }
+
   .kbd-navigation .square:focus {
     background: #ddd;
   }
@@ -48,4 +56,11 @@ body {
   .game-info {
     margin-left: 20px;
   }
-  
+  .moves {
+    display: flex;
+    flex-direction: column;
+    width: 120px;
+  }
+  .btn-revert {
+    margin-bottom: 20px;
+  }
