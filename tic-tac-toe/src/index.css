@@ -59,7 +59,6 @@ body {
   .moves {
     display: flex;
     flex-direction: column;
-    width: 120px;
   }
   .btn-revert {
     margin-bottom: 20px;
