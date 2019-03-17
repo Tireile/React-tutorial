@@ -15,7 +15,6 @@ export default class Game extends React.Component {
       stepNumber: 0,
       xIsNext: true,
       reverted: false,
-      currentLocation: null
     };
   }
 
@@ -76,15 +75,21 @@ export default class Game extends React.Component {
 
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button onClick={() => this.jumpTo(move)}>
+            {desc}
+          </button>
         </li>
       );
     });
+
+    console.log(history.length);
 
     let status;
     if (winner) {
       current.squares.winSquares = winner[3];
       status = "Winner: " + winner[0];
+    } else if (history.length === 10) {
+      status = "draw";
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
