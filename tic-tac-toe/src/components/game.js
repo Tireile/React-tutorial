@@ -1,7 +1,7 @@
 import React from "react";
 import Board from "./board";
 
-import { lastElement } from '../utils';
+import { lastElement } from "../utils";
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ export default class Game extends React.Component {
       ],
       stepNumber: 0,
       xIsNext: true,
-      reverted: false,
+      reverted: false
     };
   }
 
@@ -73,16 +73,19 @@ export default class Game extends React.Component {
         ? `Go to move #${move} [row: ${coords.row + 1}, col: ${coords.col + 1}]`
         : "Go to game start";
 
+      const liClass = '';
+
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>
+          <button 
+            onClick={() => this.jumpTo(move)}
+            className={(this.state.stepNumber === move) ? 'red': ''}
+          >
             {desc}
           </button>
         </li>
       );
     });
-
-    console.log(history.length);
 
     let status;
     if (winner) {
