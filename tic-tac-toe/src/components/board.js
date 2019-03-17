@@ -2,16 +2,18 @@ import React from 'react';
 import Square from './square';
 
 export default class Board extends React.Component {
-  renderSquare(num, i, j) {
-    const { squares, onClick } = this.props;
-    const winSquare = squares.winSquares ? squares.winSquares.includes(num): false;
+  
+  renderSquare(num, row, col) {
+    const coords = { row, col }
+    const { squares, onClick, winner } = this.props;
+    const winSquare = winner ? winner[3].includes(num): false;
 
     return (
       <Square
         key={num}
         win={winSquare}
         value={squares[num]}
-        onClick={() => onClick(num, i, j)}
+        onClick={() => onClick(num, coords)}
       />
     );
   }

@@ -14,11 +14,12 @@ export default class Game extends React.Component {
       ],
       stepNumber: 0,
       xIsNext: true,
-      reverted: false
+      reverted: false,
     };
+    this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick(num, row, col) {
+  handleClick(num, coords) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = lastElement(history);
 
@@ -41,7 +42,7 @@ export default class Game extends React.Component {
         ...history,
         {
           squares,
-          coords: { row, col }
+          coords
         }
       ],
       stepNumber: history.length,
@@ -73,8 +74,6 @@ export default class Game extends React.Component {
         ? `Go to move #${move} [row: ${coords.row + 1}, col: ${coords.col + 1}]`
         : "Go to game start";
 
-      const liClass = '';
-
       return (
         <li key={move}>
           <button 
@@ -89,7 +88,6 @@ export default class Game extends React.Component {
 
     let status;
     if (winner) {
-      current.squares.winSquares = winner[3];
       status = "Winner: " + winner[0];
     } else if (history.length === 10) {
       status = "draw";
@@ -102,7 +100,8 @@ export default class Game extends React.Component {
         <div className="game-board">
           <Board
             squares={current.squares}
-            onClick={(num, i, j) => this.handleClick(num, i, j)}
+            onClick={this.handleClick}
+            winner={winner}
           />
         </div>
 
@@ -112,7 +111,7 @@ export default class Game extends React.Component {
             Revert
           </button>
           <ol className="moves">
-            {this.state.reverted ? moves.slice().reverse() : moves}
+            {this.state.reverted ? moves.reverse() : moves}
           </ol>
         </div>
       </div>
